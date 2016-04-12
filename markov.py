@@ -8,9 +8,10 @@ def open_and_read_file(file_path):
     the file's contents as one string of text.
     """
 
-    # your code goes here
+    text_string = open(file_path).read()
 
-    return "This should be a variable that contains your file text as one long string"
+    return text_string
+    # "This should be a variable that contains your file text as one long string"
 
 
 def make_chains(text_string):
@@ -26,19 +27,62 @@ def make_chains(text_string):
         {('hi', 'there'): ['mary', 'juanita'], ('there', 'mary'): ['hi'], ('mary', 'hi': ['there']}
     """
 
+    #intializing our dictionary
     chains = {}
+            # key = (words[i], words[i+1])
+            # value = (words[i+2])
+    
+    #creating a list of our words
+    words = text_string.split()
 
-    # your code goes here
+    #we are going to make a tuple of the first two words based on the index of our words
+    for i in range(len(words)-2):
+        # iterating over our list of words, determining word1 and word2 based on their index
+        #taking the next word in our list and making it the value for our tuple key
+        # check if key in dictionary
+        # if not add it to dictionary, and add value
+
+        if (words[i], words[i+1]) in chains:
+            #key exists and I am appending the list of values
+            chains[(words[i], words[i+1])].append(words[i+2])
+        else:
+           chains[(words[i], words[i+1])] = [words[i+2]]
 
     return chains
 
 
 def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
+    
 
+    #get the first random key from the dictionary
+    rand_tuple = choice(chains.keys())
+    word1 = rand_tuple[0]
+    word2 = rand_tuple[1]
+    # make tuple into list
+    word_list = []
+    word_list.append(word1)
+    word_list.append(word2)
+    # iterate over dictionary and append to list
+
+
+
+
+
+# link is a key from our dictionary and a random word from the list
+# put that link into a container (concatenating into string)
+# once we have first link, can add another to it,
+# can keep adding more in repetetive process
+    # make a new key out of second word in first key, and random value
+    # look up new key in dictionary, pull a new random value
+    # keep doing that until Key Error
+    # word2 becomes word1
+    # use value will become word2
+
+# UNTIL we hit sam i, which can only end in am.
     text = ""
 
-    # your code goes here
+        # concatenate list into string
 
     return text
 
