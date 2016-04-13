@@ -53,21 +53,42 @@ def make_chains(text_string):
 
 def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
-    
-
+    print "Dictionary: ", chains
+    word_list = []
     #get the first random key from the dictionary
     rand_tuple = choice(chains.keys())
     word1 = rand_tuple[0]
     word2 = rand_tuple[1]
+
     # make tuple into list
-    word_list = []
     word_list.append(word1)
     word_list.append(word2)
+    key = (word1, word2)
+    # print "created key from the return tuple: ", key
+    # print "Word List:" ,word_list
+    
+
+    while True:
     # iterate over dictionary and append to list
+        possible_next_words = chains.get(key) 
+        # print "the key: ", key   
+        # print "Possible Next Words: ",possible_next_words
+        # print "***********************************"
+        if possible_next_words: 
+            value = choice(chains[key])
+            print "Value: ", value
+            # append to final list
+            word_list.append(value)  
+        # word swapping (reassign key)
+            key = (word2, value)
+            print "key: ",key
+            print "word_list: ", word_list
+        elif possible_next_words == None:
+            break
 
+    ' '.join(word_list)
 
-
-
+    return
 
 # link is a key from our dictionary and a random word from the list
 # put that link into a container (concatenating into string)
@@ -80,11 +101,11 @@ def make_text(chains):
     # use value will become word2
 
 # UNTIL we hit sam i, which can only end in am.
-    text = ""
+    #text = ""
 
         # concatenate list into string
 
-    return text
+    
 
 
 input_path = "green-eggs.txt"
